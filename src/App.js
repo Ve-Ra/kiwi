@@ -10,7 +10,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import ViewResults from './viewResults'
 
-export default class PersonList extends React.Component {
+export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
