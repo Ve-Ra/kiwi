@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b154adf8-66f4-488a-ae60-3ec4f71ed9e1" name="Default" comment="data loadi">
+    <list default="true" id="b154adf8-66f4-488a-ae60-3ec4f71ed9e1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.css" afterPath="$PROJECT_DIR$/src/App.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.js" afterPath="$PROJECT_DIR$/src/App.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -34,7 +33,7 @@
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="400">
-              <caret line="154" column="59" lean-forward="false" selection-start-line="154" selection-start-column="59" selection-end-line="154" selection-end-column="59" />
+              <caret line="154" column="112" lean-forward="false" selection-start-line="154" selection-start-column="112" selection-end-line="154" selection-end-column="112" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -287,11 +286,18 @@
       <option name="project" value="LOCAL" />
       <updated>1520799562206</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="data loading verification added">
+      <created>1520802112233</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1520802112233</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75020000" />
+    <option name="totallyTimeSpent" value="75232000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -357,7 +363,8 @@
     <MESSAGE value="date-picker added" />
     <MESSAGE value="clean up" />
     <MESSAGE value="basic styling added" />
-    <option name="LAST_COMMIT_MESSAGE" value="basic styling added" />
+    <MESSAGE value="data loading verification added" />
+    <option name="LAST_COMMIT_MESSAGE" value="data loading verification added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -668,7 +675,7 @@
     <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
-          <caret line="154" column="59" lean-forward="false" selection-start-line="154" selection-start-column="59" selection-end-line="154" selection-end-column="59" />
+          <caret line="154" column="112" lean-forward="false" selection-start-line="154" selection-start-column="112" selection-end-line="154" selection-end-column="112" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

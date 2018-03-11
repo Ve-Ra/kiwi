@@ -141,7 +141,7 @@ export default class App extends React.Component {
                             loadOptions={getOptions}
                             onChange={this.handleFromChange}
                             value={this.state.from || ''}
-                            placeholder={"Start typing..."}
+                            placeholder={"Type location and confirm with enter or select from the suggestions..."}
                         />
                     </label>
                     <br/>
@@ -152,7 +152,7 @@ export default class App extends React.Component {
                             loadOptions={getOptions}
                             onChange={this.handleToChange}
                             value={this.state.to || ''}
-                            placeholder={"Start typing..."}
+                            placeholder={"Type location and confirm with enter or select from the suggestions..."}
                         />
                     </label>
                     <br/>
