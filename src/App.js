@@ -6,7 +6,7 @@ import {AsyncCreatable} from 'react-select';
 
 import 'react-select/dist/react-select.css';
 import 'react-datepicker/dist/react-datepicker.css';
-
+import './App.css'
 
 import ViewResults from './viewResults'
 
@@ -117,7 +117,8 @@ export default class App extends React.Component {
             }, 500);
         };
 
-        return ( <div>
+        return ( <div className="formDetails">
+                <h3>Select your flight</h3>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         From:
