@@ -25,6 +25,7 @@ export default class App extends React.Component {
             next: '',
             prev: '',
             isLoading:false,
+            noEntry:false,
         };
     }
 
@@ -56,15 +57,26 @@ export default class App extends React.Component {
     handleSubmit = async event => {
         event.preventDefault();
 
+        const {from, to, startDate} = this.state;
+
         this.setState({isLoading: true});
-        const from = this.state.from.label.toLowerCase();
-        const to = this.state.to.label.toLowerCase();
-        const date = this.state.startDate.format().split('T')[0].split('-');
+        let departure;
+        let arrival;
+        if (from && this.state.to) {
+            departure = from.label.toLowerCase();
+            arrival = to.label.toLowerCase();
+            this.setState({noEntry: false});
+
+        } else {
+         this.setState({noEntry: true});
+
+        }
+        const date = startDate.format().split('T')[0].split('-');
         const day = date[2];
         const month = date[1];
         const year = date[0];
 
-        await axios.get(`https://api.skypicker.com/flights?flyFrom=${from}&to=${to}&dateFrom=${day}%2F${month}%2F${year}&offset=0&limit=5`)
+        await axios.get(`https://api.skypicker.com/flights?flyFrom=${departure}&to=${arrival}&dateFrom=${day}%2F${month}%2F${year}&offset=0&limit=5`)
             .then(res => {
                 const flights = res.data;
 
@@ -122,6 +134,8 @@ export default class App extends React.Component {
 
     render() {
 
+        const {from, to, startDate, isLoading, noEntry, submitted, flights, next, prev, nextFlights, prevFlights} = this.state;
+
         const getOptions = (input, callback) => {
             setTimeout(() => {
                 callback(null, {
@@ -140,7 +154,7 @@ export default class App extends React.Component {
                             name="form-field-from"
                             loadOptions={getOptions}
                             onChange={this.handleFromChange}
-                            value={this.state.from || ''}
+                            value={from || ''}
                             placeholder={"Type location and confirm with enter or select from the suggestions..."}
                         />
                     </label>
@@ -151,7 +165,7 @@ export default class App extends React.Component {
                             name="form-field-to"
                             loadOptions={getOptions}
                             onChange={this.handleToChange}
-                            value={this.state.to || ''}
+                            value={to || ''}
                             placeholder={"Type location and confirm with enter or select from the suggestions..."}
                         />
                     </label>
@@ -160,7 +174,7 @@ export default class App extends React.Component {
                         Date:
                         <br/>
                         <DatePicker
-                            selected={this.state.startDate}
+                            selected={startDate}
                             onChange={this.handleStartDateChange}
                         />
                     </label>
@@ -171,17 +185,18 @@ export default class App extends React.Component {
                 </form>
                 <br/>
                 <div>
-                    {this.state.isLoading ? <p>Data are loading ...</p> : <div/>}
-                    {this.state.submitted === true && this.state.flights ? <ViewResults> {this.state.flights.data}</ViewResults> : <div/>}
-                    {this.state.next && this.state.nextFlights.data ? <ViewResults> {this.state.nextFlights.data}</ViewResults> : <div/>}
-                    {this.state.prev && this.state.prevFlights.data? <ViewResults> {this.state.prevFlights.data}</ViewResults> : <div/>}
+                    {isLoading ? <p>Data are loading ...</p> : <div/>}
+                    {noEntry ? <p>You haven't entered one of the locations, please, repeat...</p> : <div/>}
+                    {submitted === true && flights ? <ViewResults> {flights.data}</ViewResults> : <div/>}
+                    {next && nextFlights.data ? <ViewResults> {nextFlights.data}</ViewResults> : <div/>}
+                    {prev && prevFlights.data? <ViewResults> {prevFlights.data}</ViewResults> : <div/>}
                     <br/>
-                    {this.state.next ? <button type="button" onClick={this.handleClickNext}>next</button> : <div/>}
+                    {next ? <button type="button" onClick={this.handleClickNext}>next</button> : <div/>}
 
-                    {this.state.prev ? <button  type="button" onClick={this.handleClickPrev}>prev</button> : <div/>}
+                    {prev ? <button  type="button" onClick={this.handleClickPrev}>prev</button> : <div/>}
                 </div>
                 <div>
-                    {this.state.submitted === true && this.state.flights.data.length === 0 ? 'Sorry, no flights from ' + this.state.from.label + ' to ' + this.state.to.label + ' were found on ' + this.state.startDate.format() + '.' : ''}
+                    {submitted === true && flights.data.length === 0 ? 'Sorry, no flights from ' + from.label + ' to ' + to.label + ' were found on ' + startDate.format() + '.' : ''}
                 </div>
             </div>
         )
