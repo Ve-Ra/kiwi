@@ -55,12 +55,14 @@ export default class App extends React.Component {
     handleSubmit = async event => {
         event.preventDefault();
 
+        const from = this.state.from.label.toLowerCase();
+        const to = this.state.to.label.toLowerCase();
         const date = this.state.startDate.format().split('T')[0].split('-');
         const day = date[2];
         const month = date[1];
         const year = date[0];
 
-        await axios.get(`https://api.skypicker.com/flights?flyFrom=${this.state.from.label}&to=${this.state.to.label}&dateFrom=${day}%2F${month}%2F${year}&offset=0&limit=5`)
+        await axios.get(`https://api.skypicker.com/flights?flyFrom=${from}&to=${to}&dateFrom=${day}%2F${month}%2F${year}&offset=0&limit=5`)
             .then(res => {
                 const flights = res.data;
 
@@ -150,7 +152,6 @@ export default class App extends React.Component {
                         />
                     </label>
                     <br/>
-                    <br/>
                     <button type="submit">Search</button>
                 </form>
                 <br/>
@@ -158,7 +159,7 @@ export default class App extends React.Component {
                     {this.state.submitted === true && this.state.flights ? <ViewResults> {this.state.flights.data}</ViewResults> : <div/>}
                     {this.state.next ? <ViewResults> {this.state.nextFlights.data}</ViewResults> : <div/>}
                     {this.state.prev ? <ViewResults> {this.state.prevFlights.data}</ViewResults> : <div/>}
-
+                    <br/>
                     {this.state.prev ? <button type="button" onClick={this.handleClickPrev}>prev</button> : <div/>}
                     {this.state.next ? <button type="button" onClick={this.handleClickNext}>next</button> : <div/>}
                 </div>

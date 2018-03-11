@@ -1,5 +1,46 @@
 .formDetails {
-  width:50%;
-  margin: auto;
+    width: 50%;
+    margin: auto;
+
 }
 
+h3 {
+    background-color: #216ba5;
+    color: white;
+    line-height: 30px;
+    padding:10px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #216ba5;
+    color: white;
+}
+
+button {
+    background-color: #216ba5;
+    color: white;
+    border-radius: 4px;
+}
