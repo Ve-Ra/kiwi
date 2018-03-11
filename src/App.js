@@ -24,6 +24,7 @@ export default class App extends React.Component {
             locationOptions: [],
             next: '',
             prev: '',
+            isLoading:false,
         };
     }
 
@@ -55,6 +56,7 @@ export default class App extends React.Component {
     handleSubmit = async event => {
         event.preventDefault();
 
+        this.setState({isLoading: true});
         const from = this.state.from.label.toLowerCase();
         const to = this.state.to.label.toLowerCase();
         const date = this.state.startDate.format().split('T')[0].split('-');
@@ -69,12 +71,16 @@ export default class App extends React.Component {
                 this.setState({flights});
                 this.setState({next: flights._next});
                 this.setState({prev: flights._prev});
+                this.setState({isLoading: false});
+
             });
         this.setState({submitted: true})
+
     };
 
     handleClickNext = async event => {
         event.preventDefault();
+        this.setState({isLoading: true});
 
         let url = this.state.next.split(':10010');
         url = url[0].concat(url[1]);
@@ -85,6 +91,8 @@ export default class App extends React.Component {
             this.setState({nextFlights: flights});
             this.setState({next: flights._next});
             this.setState({prev: flights._prev});
+            this.setState({isLoading: false});
+
         } catch (err) {
             console.log(err)
         }
@@ -93,6 +101,8 @@ export default class App extends React.Component {
 
     handleClickPrev = async event => {
         event.preventDefault();
+        this.setState({isLoading: true});
+
 
         let url = this.state.prev.split(':10010');
         url = url[0].concat(url[1]);
@@ -102,6 +112,8 @@ export default class App extends React.Component {
             this.setState({nextFlights: flights});
             this.setState({next: flights._next});
             this.setState({prev: flights._prev});
+            this.setState({isLoading: false});
+
         } catch (err) {
             console.log(err)
         }
@@ -129,7 +141,7 @@ export default class App extends React.Component {
                             loadOptions={getOptions}
                             onChange={this.handleFromChange}
                             value={this.state.from || ''}
-                            defaultValue='rrr'
+                            placeholder={"Start typing..."}
                         />
                     </label>
                     <br/>
@@ -140,11 +152,12 @@ export default class App extends React.Component {
                             loadOptions={getOptions}
                             onChange={this.handleToChange}
                             value={this.state.to || ''}
+                            placeholder={"Start typing..."}
                         />
                     </label>
                     <br/>
                     <label>
-                        Date (in format dd.mm.yyyy):
+                        Date:
                         <br/>
                         <DatePicker
                             selected={this.state.startDate}
@@ -152,16 +165,20 @@ export default class App extends React.Component {
                         />
                     </label>
                     <br/>
-                    <button type="submit">Search</button>
+                    <button className="submitButton" type="submit">Search</button>
+                    <br/>
+                    <br/>
                 </form>
                 <br/>
                 <div>
+                    {this.state.isLoading ? <p>Data are loading ...</p> : <div/>}
                     {this.state.submitted === true && this.state.flights ? <ViewResults> {this.state.flights.data}</ViewResults> : <div/>}
-                    {this.state.next ? <ViewResults> {this.state.nextFlights.data}</ViewResults> : <div/>}
-                    {this.state.prev ? <ViewResults> {this.state.prevFlights.data}</ViewResults> : <div/>}
+                    {this.state.next && this.state.nextFlights.data ? <ViewResults> {this.state.nextFlights.data}</ViewResults> : <div/>}
+                    {this.state.prev && this.state.prevFlights.data? <ViewResults> {this.state.prevFlights.data}</ViewResults> : <div/>}
                     <br/>
-                    {this.state.prev ? <button type="button" onClick={this.handleClickPrev}>prev</button> : <div/>}
                     {this.state.next ? <button type="button" onClick={this.handleClickNext}>next</button> : <div/>}
+
+                    {this.state.prev ? <button  type="button" onClick={this.handleClickPrev}>prev</button> : <div/>}
                 </div>
                 <div>
                     {this.state.submitted === true && this.state.flights.data.length === 0 ? 'Sorry, no flights from ' + this.state.from.label + ' to ' + this.state.to.label + ' were found on ' + this.state.startDate.format() + '.' : ''}

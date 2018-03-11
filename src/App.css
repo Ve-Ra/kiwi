@@ -3,6 +3,9 @@
     margin: auto;
 
 }
+p {
+    text-align: center;
+}
 
 h3 {
     background-color: #216ba5;
@@ -43,4 +46,16 @@ button {
     background-color: #216ba5;
     color: white;
     border-radius: 4px;
+    float: right;
+    width:10%;
+    height:20px;
+    font-size: 10px;
 }
+
+.submitButton{
+    width:20%;
+    height:30px;
+    font-size: 15px;
+}
+
+
